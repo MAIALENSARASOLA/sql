@@ -7,8 +7,7 @@ select
 from professors p
 join courses c on p.professor_id = c.professor_id
 join grades g on c.course_id = g.course_id
-group by 1, 2;
-
+group by p.first_name, p.last_name;
 -- mejor nota de cada alumno
 select s.first_name, s.last_name, max(g.grade) as max_nota
 from students s
