@@ -7,7 +7,7 @@ select s.first_name, s.last_name, max(g.grade) as max_nota from students s join 
 -- consulta 3: alumnos por curso
 select s.first_name, s.last_name, c.course_name from students s join grades g on s.student_id = g.student_id join courses c on g.course_id = c.course_id order by c.course_name;
 
--- consulta 4: cursos mas dificiles
+-- consulta 4: cursos maas dificiles
 select c.course_name, avg(g.grade) as nota_media from courses c join grades g on c.course_id = g.course_id group by c.course_name order by nota_media asc;
 
 -- consulta 5: quien coincide mas
