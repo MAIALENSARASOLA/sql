@@ -15,5 +15,5 @@ insert into courses (course_name, professor_id) values
 insert into grades (student_id, course_id, grade) values
 (1, 1, 8.50),
 (1, 2, 9.00),
-(2, 1, 7.00),
+(2, 1, 7.00),,
 (3, 3, 8.00);
