@@ -9,7 +9,6 @@ student_id int auto_increment primary key,
 first_name varchar(50),
 last_name varchar(50)
 );
-
 create table professors (
 professor_id int auto_increment primary key,
 first_name varchar(50),
