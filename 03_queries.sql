@@ -1,35 +1,14 @@
+-- consulta 1: la media por profesor
+select p.first_name, p.last_name, avg(g.grade) as media_profe from professors p join courses c on p.professor_id = c.professor_id join grades g on c.course_id = g.course_id group by p.first_name, p.last_name;
 
-SELECT p.first_name, p.last_name, avg(g.grade) as media_profe
-FROM professors p
-JOIN courses c ON p.professor_id = c.professor_id
-JOIN grades g ON c.course_id = g.course_id
-GROUP BY p.first_name, p.last_name;
+-- consulta 2: nota maxima de cada alumno
+select s.first_name, s.last_name, max(g.grade) as max_nota from students s join grades g on s.student_id = g.student_id group by s.first_name, s.last_name;
 
-SELECT s.first_name, s.last_name, MAX(g.grade) AS max_nota
-FROM students s
-JOIN grades g ON s.student_id = g.student_id
-GROUP BY s.first_name, s.last_name;
+-- consulta 3: alumnos por curso
+select s.first_name, s.last_name, c.course_name from students s join grades g on s.student_id = g.student_id join courses c on g.course_id = c.course_id order by c.course_name;
 
-SELECT s.first_name, s.last_name, c.course_name
-FROM students s
-JOIN grades g ON s.student_id = g.student_id
-JOIN courses c ON g.course_id = c.course_id
-ORDER BY c.course_name ASC;
+-- consulta 4: cursos mas dificiles
+select c.course_name, avg(g.grade) as nota_media from courses c join grades g on c.course_id = g.course_id group by c.course_name order by nota_media asc;
 
-SELECT c.course_name, AVG(g.grade) AS nota_media
-FROM courses c
-JOIN grades g ON c.course_id = g.course_id
-GROUP BY c.course_name
-ORDER BY nota_media ASC;
-
-SELECT 
-  s.first_name, s.last_name, 
-  p.first_name, p.last_name, 
-  COUNT(DISTINCT c.course_id) AS total_comun
-FROM students s
-JOIN grades g ON s.student_id = g.student_id
-JOIN courses c ON g.course_id = c.course_id
-JOIN professors p ON c.professor_id = p.professor_id
-GROUP BY s.first_name, s.last_name, p.first_name, p.last_name
-ORDER BY total_comun DESC
-LIMIT 1;
+-- consulta 5: quien coincide mas
+select s.first_name, s.last_name, p.first_name, p.last_name, count(distinct c.course_id) as total_comun from students s join grades g on s.student_id = g.student_id join courses c on g.course_id = c.course_id join professors p on c.professor_id = p.professor_id group by s.first_name, s.last_name, p.first_name, p.last_name order by total_comun desc limit 1;
